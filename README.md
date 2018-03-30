@@ -10,7 +10,7 @@ Install packages: **wget**, **curl**, **sed**, **[jq](https://stedolan.github.io
 
 **CentOS:** `sudo yum install -y wget curl sed jq bc`
 
-**[kapu-node](https://github.com/RipaEx/ripa-node)** installed and sync. on port 5500 on local server.
+**[ripa-node](https://github.com/RipaEx/ripa-node)** installed and sync. on port 5500 on local server.
 
 A functional local web server like **[nginx](https://www.nginx.com/)** or **[apache](http://httpd.apache.org/)**  to share the generated report.
 
