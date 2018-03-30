@@ -32,7 +32,7 @@ function PrintJsonData {
 		PublicKey=$( echo $Line | jq -r '.publicKey' )
 		Voters=$( printf %4s $( GetVotersCount $PublicKey ) )
 		
-		echo "|  $Rank  | $Delegate |  $Approval  | $Vote |  $Voters  |" >> $2
+		echo "|   $Rank   | $Delegate |  $Approval  | $Vote |  $Voters  |" >> $2
 	done
 }
 
@@ -73,19 +73,19 @@ function PrintTotalVotingWeightData {
 ###############################################################################
 
 JsonData1=$( curl -s 'http://127.0.0.1:5500/api/delegates' )
-JsonData2=$( curl -s 'http://127.0.0.1:5500/api/delegates?limit=29&offset=51' )
+JsonData2=$( curl -s 'http://127.0.0.1:5500/api/delegates?limit=29&offset=101' )
 
 WorkFile='./TxtVoteReport.txt'
 
 echo '' > $WorkFile
 PrintTotalVotingWeightData $JsonData1 $WorkFile
-echo '===================================================================' >> $WorkFile
-echo '| Rank | Delegate                  | Vote % |  Vote XPX  | Voters |' >> $WorkFile
-echo '===================================================================' >> $WorkFile
+echo '=====================================================================' >> $WorkFile
+echo '|  Rank  | Delegate                  | Vote % |  Vote XPX  | Voters |' >> $WorkFile
+echo '=====================================================================' >> $WorkFile
 PrintJsonData $JsonData1 $WorkFile
-echo '===================================================================' >> $WorkFile
+echo '=====================================================================' >> $WorkFile
 PrintJsonData $JsonData2 $WorkFile
-echo '===================================================================' >> $WorkFile
+echo '=====================================================================' >> $WorkFile
 Date=$( date -u "+%Y-%m-%d %H:%M:%S" )
 echo -e "\n$Date UTC / TxtVoteReport.sh v1.2 / ripaex.io (gsilvestri)\n" >> $WorkFile
 
