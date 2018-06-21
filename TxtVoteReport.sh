@@ -87,7 +87,7 @@ echo '=====================================================================' >> 
 PrintJsonData $JsonData2 $WorkFile
 echo '=====================================================================' >> $WorkFile
 Date=$( date -u "+%Y-%m-%d %H:%M:%S" )
-echo -e "\n$Date UTC / TxtVoteReport.sh v1.2 / ripaex.io (gsilvestri)\n" >> $WorkFile
+echo -e "\n$Date UTC / TxtVoteReport.sh v1.2 / ripaex.io (ripa_node_1)\n" >> $WorkFile
 
 #cat $WorkFile
 cp -f $WorkFile $OutputFile
