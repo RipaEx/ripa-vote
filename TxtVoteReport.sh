@@ -20,7 +20,7 @@ function PrintJsonData {
 
 	echo $1 | jq -c -r '.delegates[] | { rate, username, vote, address, publicKey, approval }' | while read Line; do
 		
-		Rank=$( printf %02d $( echo $Line | jq -r '.rate' ) )
+		Rank=$( printf %03d $( echo $Line | jq -r '.rate' ) )
 		
 		Delegate=$( printf %-25s $( echo $Line | jq -r '.username' ) )
 		Approval=$( printf %0.2f $( echo $Line | jq -r '.approval' ) )
@@ -32,7 +32,7 @@ function PrintJsonData {
 		PublicKey=$( echo $Line | jq -r '.publicKey' )
 		Voters=$( printf %4s $( GetVotersCount $PublicKey ) )
 		
-		echo "|   $Rank   | $Delegate |  $Approval  | $Vote |  $Voters  |" >> $2
+		echo "|   $Rank   | $Delegate |   $Approval | $Vote |   $Voters |" >> $2
 	done
 }
 
@@ -63,7 +63,7 @@ function PrintTotalVotingWeightData {
 	TotalArk=$( expr $( echo $TotalArk ) / 100000000 )
 	TotalArk=$( echo $TotalArk | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' )
 	
-	echo -e "Top 51 Delegates Stats\n" >> $2
+	echo -e "Top 101 Delegates Stats\n" >> $2
 	echo -e "=> Total Votes  : $Percentage% ( $TotalVote / $TotalArk )" >> $2
 	echo -e "=> Total Voters : $TotalVoters\n" >> $2
 }
@@ -79,13 +79,13 @@ WorkFile='./TxtVoteReport.txt'
 
 echo '' > $WorkFile
 PrintTotalVotingWeightData $JsonData1 $WorkFile
-echo '=====================================================================' >> $WorkFile
-echo '|  Rank  | Delegate                  | Vote % |  Vote XPX  | Voters |' >> $WorkFile
-echo '=====================================================================' >> $WorkFile
+echo '======================================================================' >> $WorkFile
+echo '|    #    | Delegate                  | Vote % |   Vote XPX | Voters |' >> $WorkFile
+echo '======================================================================' >> $WorkFile
 PrintJsonData $JsonData1 $WorkFile
-echo '=====================================================================' >> $WorkFile
+echo '======================================================================' >> $WorkFile
 PrintJsonData $JsonData2 $WorkFile
-echo '=====================================================================' >> $WorkFile
+echo '======================================================================' >> $WorkFile
 Date=$( date -u "+%Y-%m-%d %H:%M:%S" )
 echo -e "\n$Date UTC / TxtVoteReport.sh v1.2 / ripaex.io (ripa_node_1)\n" >> $WorkFile
 
